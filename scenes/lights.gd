@@ -28,6 +28,10 @@ var lanterns_root : Node3D = null
 
 
 func _ready():
+	var s = LanternScene.duplicate()
+	get_tree().root.add_child.call_deferred(s)
+	s.position = Vector3.DOWN * 1024.0
+
 	if preview_material == null:
 		preview_material = StandardMaterial3D.new()
 		preview_material.albedo_color = Color(0.2, 1, 0.4, 0.4)
@@ -38,7 +42,7 @@ func _ready():
 
 
 func ray_hints(_body):
-	if !can_use(_body):
+	if self.disabled:
 		GLOBAL.hints.rm_hint("use_lights")
 		return []
 	return [
@@ -57,7 +61,8 @@ func tick_ray(point: Vector3, _dir, body, _normal):
 
 
 func use(point: Vector3, _dir, body, _normal):
-	if !can_use(body): return
+	if self.disabled: return
+	if !body: return
 	if not has_start:
 		if not body:
 			return
@@ -183,4 +188,5 @@ func can_use(_body):
 	if !_body: return false
 	if _body.is_in_group("campfire"): return false
 	if _body.is_in_group("pickable"): return false
+
 	return true

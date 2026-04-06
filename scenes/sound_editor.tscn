@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c1iw60gx7wts8"]
+
+[ext_resource type="Script" uid="uid://bnfwndqcf8djq" path="res://scenes/sound_editor.gd" id="1_e5c8y"]
+
+[node name="SoundEditor" type="HBoxContainer" unique_id=1733366844]
+size_flags_horizontal = 3
+script = ExtResource("1_e5c8y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=509541796]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=69199445]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer" unique_id=165632888]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="." unique_id=1494559570]
+layout_mode = 2
+
+[connection signal="value_changed" from="VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]

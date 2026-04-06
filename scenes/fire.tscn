@@ -132,6 +132,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_fcea1")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ia3m4"]
+disable_fog = true
 albedo_texture = ExtResource("10_ajlmw")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tuqhi"]
@@ -160,7 +161,7 @@ skeleton = NodePath("")
 [node name="fire2" parent="." unique_id=1636416717 instance=ExtResource("7_10wrr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.39087, 0, 8.26782)
 
-[node name="Cube" parent="fire2" index="0" unique_id=2119411058]
+[node name="Cube" parent="fire2" index="0" unique_id=712593973]
 material_override = SubResource("ShaderMaterial_theev")
 
 [node name="Cube2" type="MeshInstance3D" parent="fire2" unique_id=1493816154]
@@ -173,12 +174,15 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.20084, 0, 7.896749)
 
 [node name="костер" parent="firecamp" index="0" unique_id=140590226]
+layers = 5
 material_override = SubResource("StandardMaterial3D_ia3m4")
 
 [node name="огонь" parent="firecamp" index="1" unique_id=45320195]
+layers = 5
 material_override = SubResource("ShaderMaterial_theev")
 
 [node name="камни" parent="firecamp" index="2" unique_id=1831142534]
+layers = 5
 material_override = SubResource("StandardMaterial3D_tuqhi")
 
 [editable path="fire2"]

@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://4y8cm8uws24m"]
+
+[ext_resource type="FontFile" uid="uid://sin14qbi5xnr" path="res://assets/font/kaivs_minegram_v1.ttf" id="1_5x3i2"]
+
+[resource]
+default_font = ExtResource("1_5x3i2")
+default_font_size = 48

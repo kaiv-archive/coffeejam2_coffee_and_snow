@@ -6,7 +6,7 @@ var preview
 var size = 1.0
 var size_min = 0.1
 var size_max = 10.0
-var size_gain = 0.3
+var size_gain = 0.1
 
 
 func _ready():
@@ -89,7 +89,9 @@ func use(_point: Vector3, _dir, _body, _normal):
 	c.disabled = false
 	body.add_child(c)
 	body.add_child($MeshInstance3D.duplicate())
-	
+	body.add_to_group("pasted")
+	print(body)
+
 	#cleanup()
 	#preview.queue_free()
 	#self.queue_free()

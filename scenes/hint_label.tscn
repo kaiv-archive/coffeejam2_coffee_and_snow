@@ -14,7 +14,7 @@ script/source = "extends StaticBody3D
 @export var hover_key = \"KEY\"
 
 func _ready():
-	$Label3D.text = hint1 + '\\n' + hint2 + '\\n' + hint3 + '\\n' + hint4
+	$Label3D.text = tr(hint1) + '\\n' + tr(hint2) + '\\n' + tr(hint3) + '\\n' + tr(hint4)
 
 func hint():
 	return [

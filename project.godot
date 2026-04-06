@@ -15,9 +15,16 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="coffeejam2"
-run/main_scene="uid://7eslxc22l53b"
+run/main_scene="uid://b7hicjnoj354u"
 config/features=PackedStringArray("4.6", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/use_filter=false
+boot_splash/image="uid://dixbley4jlipp"
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="uid://wq53xe2fqskf"
 
 [autoload]
 
@@ -43,6 +50,16 @@ coffeemaker=""
 make_snowballs=""
 hint=""
 player=""
+fog=""
+snow_particles=""
+environment=""
+global_light=""
+outer_fog=""
+house_collider=""
+eraser=""
+image=""
+snowball=""
+pasted=""
 
 [input]
 
@@ -107,6 +124,13 @@ space={
 ]
 }
 
+[internationalization]
+
+locale/translation_remaps={
+"res://assets/your_image.png": PackedStringArray("res://assets/your_image.png:ru_RU", "res://assets/your_image_en.png:en")
+}
+locale/translations=PackedStringArray("res://assets/locale/locale.ru_RU.translation", "res://assets/locale/locale.en_US.translation")
+
 [physics]
 
 common/physics_interpolation=true
@@ -115,5 +139,8 @@ common/physics_interpolation=true
 
 textures/canvas_textures/default_texture_filter=0
 textures/vram_compression/import_etc2_astc=true
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=3
 anti_aliasing/quality/msaa_2d=3
 anti_aliasing/quality/msaa_3d=3
+anti_aliasing/quality/screen_space_aa=2

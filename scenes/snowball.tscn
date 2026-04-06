@@ -4,7 +4,7 @@
 resource_name = "snowball"
 script/source = "extends Heldable
 
-@export var growth_rate: float = 0.05        # скорость роста
+@export var growth_rate: float = 0.024        # скорость роста
 @export var max_scale: float = 5.5          # максимальный размер
 @export var min_roll_speed: float = 0.3     # минимальная скорость для роста
 @export var ray_length: float = 0.04         # длина рейкаста вниз
@@ -43,25 +43,21 @@ func _ready():
 
 func _physics_process(delta):
 	_update_ground_cast()
-
 	var on_ground := false
 	for i in range(ground_cast.get_collision_count()):
 		var b = ground_cast.get_collider(i)
 		if b.is_in_group(\"player\"): continue
 		on_ground = true
-
-	#ray_length = current_size
-
 	var horizontal_velocity := linear_velocity
 	horizontal_velocity.y = 0.0
 	var speed := horizontal_velocity.length()
-
 	var is_rolling := on_ground and speed > min_roll_speed
 	if is_rolling:
-		var grow = growth_rate * speed * delta
+		var size_factor = 1.0 - (current_size / max_scale)
+		var grow = growth_rate * speed * size_factor * delta
 		current_size = clamp(current_size + grow, 0.0, max_scale)
-		$MeshInstance3D.mesh.radius = current_size + 0.02
-		$MeshInstance3D.mesh.height = (current_size + 0.02) * 2
+		$MeshInstance3D.mesh.radius = current_size + 0.05
+		$MeshInstance3D.mesh.height = (current_size + 0.05) * 2
 		$CollisionShape3D.shape.radius = current_size
 		ground_cast.shape.radius = current_size
 
@@ -95,6 +91,7 @@ func ray_hints(_body):
 
 func use(_point: Vector3, _dir, _body, _normal):
 	if !can_use(_body): return
+	GLOBAL.player.get_node(\"Sounds/SnowballPaste\").play()
 	var body = StaticBody3D.new()
 	get_tree().root.add_child(body)
 	body.global_position = _normal * current_size + _point
@@ -102,6 +99,7 @@ func use(_point: Vector3, _dir, _body, _normal):
 	c.disabled = false
 	body.add_child(c)
 	body.add_child($MeshInstance3D.duplicate())
+	body.add_to_group(\"snowball\")
 	cleanup()
 	preview.queue_free()
 	self.queue_free()
@@ -119,7 +117,11 @@ func can_use(_body):
 	if self.disabled: return false
 	if !_body: return false
 	if _body.is_in_group(\"campfire\"): return false
+	if _body.is_in_group(\"pickable_joint\"): return false
 	return true
+
+func on_pickup():
+	GLOBAL.player.get_node(\"Sounds/Snowball\").play()
 "
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6tw0o"]

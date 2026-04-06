@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dj3cyglnyjh16"]
+
+[ext_resource type="Script" uid="uid://po1cbtafsx04" path="res://scenes/coffeejam2cup.gd" id="1_fhdsp"]
+[ext_resource type="Texture2D" uid="uid://dvjietl1au4r5" path="res://assets/models/cup2/CupTexture.png" id="2_d3uen"]
+[ext_resource type="ArrayMesh" uid="uid://1cj3oxak6qrr" path="res://assets/models/cup2/CoffeeJam2Cup.obj" id="3_3j1w3"]
+[ext_resource type="AudioStream" uid="uid://bbh5qpn6qrvjq" path="res://assets/audio/slurp_src.mp3" id="4_cec2l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cli8x"]
+albedo_texture = ExtResource("2_d3uen")
+texture_filter = 0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_choun"]
+points = PackedVector3Array(-0.200553, 0.18284148, 0.028812915, -0.15316314, 0.18284148, 0.13265476, -0.200553, 0.24568626, 0.028812915, -0.18433757, 0.18284148, -0.08420057, -0.1198685, -0.185873, 0.0171929, -0.057126984, 0.18284148, 0.194408, -0.15316314, 0.24568626, 0.13265476, -0.09152096, -0.185873, 0.07925704, -0.15646118, 0.293606, 0.022478253, -0.18433757, 0.24568626, -0.08420057, -0.10958172, 0.18284148, -0.17047635, -0.11013139, -0.185873, -0.050312072, -0.03411913, -0.185873, 0.11613798, 0.05704847, 0.18284148, 0.194408, -0.057126984, 0.24568626, 0.194408, -0.11947588, 0.293606, 0.10346866, -0.14377938, 0.293606, -0.065662935, -0.08547453, 0.293606, -0.13297358, -0.10958172, 0.24568626, -0.17047635, -3.926456e-05, 0.18284148, -0.202616, -3.926456e-05, -0.185873, -0.121081516, -0.06545064, -0.185873, -0.101844355, 0.03407988, -0.185873, 0.11613798, 0.15312386, 0.18284148, 0.13265476, 0.05704847, 0.24568626, 0.194408, 0.091481686, -0.185873, 0.07925704, -0.044562966, 0.293606, 0.15161988, -3.926456e-05, 0.293606, -0.15807906, -3.926456e-05, 0.24568626, -0.202616, 0.10950321, 0.18284148, -0.17047635, 0.06541139, -0.185873, -0.101844355, 0.200553, 0.18284148, 0.028812915, 0.15312386, 0.24568626, 0.13265476, 0.11943662, 0.293606, 0.10346866, 0.04448445, 0.293606, 0.15161988, 0.11978999, -0.185873, 0.0171929, 0.08543527, 0.293606, -0.13297358, 0.10950321, 0.2457332, -0.17047635, 0.1842983, 0.18284148, -0.08420057, 0.11009213, -0.185873, -0.050312072, 0.200553, 0.24568626, 0.028812915, 0.15642193, 0.293606, 0.022478253, 0.14374012, 0.293606, -0.065662935, 0.1842983, 0.24568626, -0.08420057)
+
+[node name="CoffeeJam2Cup" type="RigidBody3D" unique_id=62438432 groups=["heldable", "pickable"]]
+can_sleep = false
+linear_damp = 0.1
+angular_damp = 0.1
+script = ExtResource("1_fhdsp")
+
+[node name="CoffeeJam2Cup" type="MeshInstance3D" parent="." unique_id=392589588]
+material_override = SubResource("StandardMaterial3D_cli8x")
+mesh = ExtResource("3_3j1w3")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=431319193]
+shape = SubResource("ConvexPolygonShape3D_choun")
+
+[node name="SlurpSrc" type="AudioStreamPlayer" parent="." unique_id=1731433737]
+stream = ExtResource("4_cec2l")
+volume_db = -3.831
+bus = &"FX"

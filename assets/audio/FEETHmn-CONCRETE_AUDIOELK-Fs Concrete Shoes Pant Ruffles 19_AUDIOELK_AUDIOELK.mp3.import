@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d3gmdquw1uhor"
+path="res://.godot/imported/FEETHmn-CONCRETE_AUDIOELK-Fs Concrete Shoes Pant Ruffles 19_AUDIOELK_AUDIOELK.mp3-e8003dbe5258625ad00a18e9d231c030.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/FEETHmn-CONCRETE_AUDIOELK-Fs Concrete Shoes Pant Ruffles 19_AUDIOELK_AUDIOELK.mp3"
+dest_files=["res://.godot/imported/FEETHmn-CONCRETE_AUDIOELK-Fs Concrete Shoes Pant Ruffles 19_AUDIOELK_AUDIOELK.mp3-e8003dbe5258625ad00a18e9d231c030.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

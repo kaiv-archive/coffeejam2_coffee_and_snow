@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded, cull_disabled, depth_prepass_alpha, blend_add;
+render_mode unshaded, cull_disabled, depth_prepass_alpha, blend_add, fog_disabled;
 
 uniform sampler2D noise_vertex;
 uniform sampler2D noise_big;

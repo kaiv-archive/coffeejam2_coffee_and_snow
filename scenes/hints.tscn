@@ -1,0 +1,162 @@
+[gd_scene format=3 uid="uid://du5xcyuhq4fl8"]
+
+[ext_resource type="FontFile" uid="uid://sin14qbi5xnr" path="res://assets/font/kaivs_minegram_v1.ttf" id="1_wixqs"]
+
+[sub_resource type="GDScript" id="GDScript_o6xl0"]
+resource_name = "hints"
+script/source = "extends CanvasLayer
+
+@onready var base = $Control/CenterContainer/Hint
+
+var hints : Dictionary = {}
+
+func clear_hints():
+	for hint in hints.values():
+		hint.queue_free()
+	hints = {}
+
+func center_hint_raw(r):
+	var key = r[0]
+	var keycode = r[1]
+	var label = r[2]
+	center_hint(key, keycode, label)
+
+func hint_raw(r):
+	var key = r[0]
+	var keycode = r[1]
+	var label = r[2]
+	hint(key, keycode, label)
+
+func center_hint(key, keycode, label):
+	_add_hint($Control/CenterContainer/VBoxContainer, true, key, keycode, label)
+
+func center_top_hint(key, keycode, label):
+	_add_hint($Control/CenterContainer/CenterTop, true, key, keycode, label)
+
+func hint(key, keycode, label):
+	_add_hint($Control/MarginContainer/VBoxContainer, false, key, keycode, label)
+
+func _add_hint(node, centered, key, keycode, label):
+	var h = hints.get(key)
+	if h:
+		h.set_hint(keycode, label)
+		return
+	var hint : HBoxContainer = base.duplicate()
+	if centered: hint.alignment = BoxContainer.ALIGNMENT_CENTER
+	node.add_child(hint)
+	hint.set_hint(keycode, label)
+	hints[key] = hint
+	hint.show()
+	
+
+func rm_hint(key):
+	var h = hints.get(key)
+	if h == null: return
+	h.queue_free()
+	hints.erase(key)
+"
+
+[sub_resource type="Theme" id="Theme_o6xl0"]
+default_font = ExtResource("1_wixqs")
+default_font_size = 32
+
+[sub_resource type="GDScript" id="GDScript_tipki"]
+resource_name = "hint_record"
+script/source = "extends HBoxContainer
+
+@onready var btn = $Btn
+@onready var label = $Label
+
+func set_hint(key, text):
+	btn.text = key
+	label.text = text
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_o6xl0"]
+font_size = 40
+outline_size = 8
+outline_color = Color(0.22, 0.22, 0.22, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6xl0"]
+content_margin_left = 13.0
+content_margin_right = 11.0
+content_margin_bottom = 6.0
+bg_color = Color(0.4236506, 0.42365065, 0.42365053, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.21590167, 0.21590179, 0.21590155, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Hints" type="CanvasLayer" unique_id=1182998167]
+script = SubResource("GDScript_o6xl0")
+
+[node name="Control" type="Control" parent="." unique_id=1522133858]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_o6xl0")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=1135763683]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -213.0
+offset_bottom = 64.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer" unique_id=524655043]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CenterContainer" type="CenterContainer" parent="Control" unique_id=1122444474]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Hint" type="HBoxContainer" parent="Control/CenterContainer" unique_id=690956935]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+alignment = 2
+script = SubResource("GDScript_tipki")
+
+[node name="Label" type="Label" parent="Control/CenterContainer/Hint" unique_id=374464624]
+layout_mode = 2
+text = "Жарить маршмеллов"
+label_settings = SubResource("LabelSettings_o6xl0")
+
+[node name="Btn" type="Label" parent="Control/CenterContainer/Hint" unique_id=715945445]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_o6xl0")
+text = "E"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer" unique_id=87157059]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="Control/CenterContainer/VBoxContainer" unique_id=18023738]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CenterTop" type="VBoxContainer" parent="Control/CenterContainer" unique_id=981501096]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+mouse_filter = 2

@@ -1,0 +1,342 @@
+[gd_scene format=3 uid="uid://dlcjpqqkanwi3"]
+
+[ext_resource type="Script" uid="uid://m2mftbd0h4hi" path="res://scenes/settings.gd" id="1_5p8wc"]
+[ext_resource type="Theme" uid="uid://4y8cm8uws24m" path="res://assets/theme.tres" id="2_r6d6q"]
+[ext_resource type="PackedScene" uid="uid://c1iw60gx7wts8" path="res://scenes/sound_editor.tscn" id="3_6wm04"]
+
+[node name="Settings" type="CanvasLayer" unique_id=1990386742]
+script = ExtResource("1_5p8wc")
+
+[node name="Control" type="Control" parent="." unique_id=745558381]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_r6d6q")
+
+[node name="Panel" type="Panel" parent="Control" unique_id=1344140263]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=700173700]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 450
+theme_override_constants/margin_top = 34
+theme_override_constants/margin_right = 450
+theme_override_constants/margin_bottom = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/MarginContainer" unique_id=13018383]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/ScrollContainer" unique_id=1859263502]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="Control/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1506704197]
+visible = false
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="preset" type="HBoxContainer" parent="Control/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1538452206]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/preset" unique_id=1268528461]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Пресет"
+vertical_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/preset" unique_id=833182637]
+layout_mode = 2
+alignment = 1
+selected = 1
+item_count = 5
+popup/item_0/text = "🚀РАКЕТА 🚀"
+popup/item_0/id = 0
+popup/item_1/text = "🚗МАШИНА🚗"
+popup/item_1/id = 1
+popup/item_2/text = "🔥ПЕЧКА🔥"
+popup/item_2/id = 2
+popup/item_3/text = "🥔КАРТОШКА 🥔"
+popup/item_3/id = 3
+popup/item_4/text = "🤭Свой🤭"
+popup/item_4/id = 4
+
+[node name="Sound" type="FoldableContainer" parent="Control/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1320142471]
+layout_mode = 2
+title = "ЗВУК"
+title_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Sound" unique_id=1005609940]
+layout_mode = 2
+
+[node name="SoundEditor" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Sound/VBoxContainer" unique_id=1733366844 instance=ExtResource("3_6wm04")]
+layout_mode = 2
+bus = "Master"
+label_text = "Мастер"
+
+[node name="SoundEditor2" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Sound/VBoxContainer" unique_id=1636875765 instance=ExtResource("3_6wm04")]
+layout_mode = 2
+bus = "FX"
+label_text = "Эффекты"
+
+[node name="SoundEditor3" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Sound/VBoxContainer" unique_id=1594006443 instance=ExtResource("3_6wm04")]
+layout_mode = 2
+bus = "Ambient"
+label_text = "Окружение"
+
+[node name="SoundEditor4" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Sound/VBoxContainer" unique_id=1161948704 instance=ExtResource("3_6wm04")]
+layout_mode = 2
+bus = "Music"
+label_text = "Музыка"
+
+[node name="AntiAliasing" type="FoldableContainer" parent="Control/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1965390226]
+layout_mode = 2
+title = "ДИСПЛЕЙ"
+title_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/AntiAliasing" unique_id=320748036]
+layout_mode = 2
+
+[node name="AA" type="HBoxContainer" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/AntiAliasing/VBoxContainer" unique_id=1552848611]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/AntiAliasing/VBoxContainer/AA" unique_id=130867854]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Сглаживание"
+
+[node name="OptionButton" type="OptionButton" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/AntiAliasing/VBoxContainer/AA" unique_id=50961144]
+layout_mode = 2
+alignment = 1
+selected = 1
+item_count = 5
+popup/item_0/text = "Нет"
+popup/item_0/id = 0
+popup/item_1/text = "2X"
+popup/item_1/id = 3
+popup/item_2/text = "4X"
+popup/item_2/id = 4
+popup/item_3/text = "8X"
+popup/item_3/id = 5
+popup/item_4/text = "MAX"
+popup/item_4/id = 4
+
+[node name="Vsync" type="HBoxContainer" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/AntiAliasing/VBoxContainer" unique_id=2099919493]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/AntiAliasing/VBoxContainer/Vsync" unique_id=702652065]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Vsync"
+
+[node name="CheckBox" type="CheckBox" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/AntiAliasing/VBoxContainer/Vsync" unique_id=920927790]
+layout_mode = 2
+button_pressed = true
+
+[node name="Anistrophy" type="HBoxContainer" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/AntiAliasing/VBoxContainer" unique_id=1832140155]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/AntiAliasing/VBoxContainer/Anistrophy" unique_id=1848157945]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Фильтрация"
+
+[node name="OptionButton" type="OptionButton" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/AntiAliasing/VBoxContainer/Anistrophy" unique_id=1867199986]
+layout_mode = 2
+alignment = 1
+selected = 1
+item_count = 5
+popup/item_0/text = "Нет"
+popup/item_0/id = 0
+popup/item_1/text = "2X"
+popup/item_1/id = 3
+popup/item_2/text = "4X"
+popup/item_2/id = 4
+popup/item_3/text = "8X"
+popup/item_3/id = 5
+popup/item_4/text = "MAX"
+popup/item_4/id = 4
+
+[node name="Shadows" type="FoldableContainer" parent="Control/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1021985855]
+visible = false
+layout_mode = 2
+title = "ТЕНИ"
+title_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Shadows" unique_id=646393859]
+layout_mode = 2
+
+[node name="GlobalLight" type="HBoxContainer" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Shadows/VBoxContainer" unique_id=1431192862]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Shadows/VBoxContainer/GlobalLight" unique_id=549851767]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Режим глобального освещения"
+
+[node name="OptionButton" type="OptionButton" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Shadows/VBoxContainer/GlobalLight" unique_id=741383450]
+layout_mode = 2
+alignment = 1
+selected = 1
+item_count = 3
+popup/item_0/text = "Orthiganal"
+popup/item_0/id = 0
+popup/item_1/text = "PSSM 2"
+popup/item_1/id = 1
+popup/item_2/text = "PSSM 4"
+popup/item_2/id = 2
+
+[node name="Environment" type="FoldableContainer" parent="Control/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1717598371]
+layout_mode = 2
+title = "ОКРУЖЕНИЕ"
+title_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Environment" unique_id=818566597]
+layout_mode = 2
+
+[node name="FogType" type="HBoxContainer" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Environment/VBoxContainer" unique_id=1500665836]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Environment/VBoxContainer/FogType" unique_id=1968034460]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Туман"
+
+[node name="OptionButton" type="OptionButton" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Environment/VBoxContainer/FogType" unique_id=1621703551]
+layout_mode = 2
+alignment = 1
+selected = 0
+item_count = 2
+popup/item_0/text = "Упрощенный"
+popup/item_0/id = 0
+popup/item_1/text = "Объемный"
+popup/item_1/id = 1
+
+[node name="Snow" type="HBoxContainer" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Environment/VBoxContainer" unique_id=1286606337]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Environment/VBoxContainer/Snow" unique_id=50807098]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Снег"
+
+[node name="OptionButton" type="OptionButton" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Environment/VBoxContainer/Snow" unique_id=1065315595]
+layout_mode = 2
+alignment = 1
+selected = 0
+item_count = 5
+popup/item_0/text = "Минимум"
+popup/item_0/id = 0
+popup/item_1/text = "Мало"
+popup/item_1/id = 1
+popup/item_2/text = "Средне"
+popup/item_2/id = 2
+popup/item_3/text = "Много"
+popup/item_3/id = 3
+popup/item_4/text = "Идеально"
+popup/item_4/id = 4
+
+[node name="SSAO" type="HBoxContainer" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Environment/VBoxContainer" unique_id=1414043666]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Environment/VBoxContainer/SSAO" unique_id=1957120341]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SSAO"
+
+[node name="CheckBox" type="CheckBox" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Environment/VBoxContainer/SSAO" unique_id=1558102411]
+layout_mode = 2
+button_pressed = true
+
+[node name="SSIL" type="HBoxContainer" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Environment/VBoxContainer" unique_id=279559248]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Environment/VBoxContainer/SSIL" unique_id=953348290]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SSIL"
+
+[node name="CheckBox" type="CheckBox" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Environment/VBoxContainer/SSIL" unique_id=1740593403]
+layout_mode = 2
+button_pressed = true
+
+[node name="SDFGI" type="HBoxContainer" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Environment/VBoxContainer" unique_id=857973060]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Environment/VBoxContainer/SDFGI" unique_id=1773547413]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SDFGI"
+
+[node name="CheckBox" type="CheckBox" parent="Control/MarginContainer/ScrollContainer/VBoxContainer/Environment/VBoxContainer/SDFGI" unique_id=2009191846]
+layout_mode = 2
+button_pressed = true
+
+[node name="Label" type="Label" parent="Control/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1186664419]
+layout_mode = 2
+text = "АССЕТЫ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/MarginContainer/ScrollContainer/VBoxContainer" unique_id=553880694]
+layout_mode = 2
+text = "Динобро и кофе - https://drive.google.com/drive/folders/1iHSV3VwugznhHNZy-mG_uv9kwUWAUI6k
+Ковер 1 - https://res.cloudinary.com/rugstudio-com/image/upload/f_auto%2Cq_auto/files/productimages/solorugs/s_m1688-92.jpg
+Ковер 2 - https://s3.stroi-news.ru/img/kover-krasnii-s-uzorami-dizain-vkontakte-25.jpg
+Ковер 3 - https://ru.pinterest.com/pin/416512665558483658/
+Текстура досок и бревен - https://texture.ninja/
+шторы - https://www.pngegg.com/en/png-fykah/download
+салфетка - https://www.pngegg.com/ru/png-nbobw
+Coffee Machine by Zsky [CC-BY] via Poly Pizza https://poly.pizza/m/kRpKjpQsEd
+
+
+WHOOSH_ARM_SWING_01_WIDE.wav - Shapeforms Audio Free Sound Effects\\Hit and Punch Preview 
+
+зефирк - https://freesound.org/people/opriema/sounds/797763/
+гитара - https://freesound.org/search/?q=guitar&f=pack_grouping%3A%2223426_Brylie+Christopher+Oxley+-+guitar%22
+
+делать снежки - https://freesound.org/people/arnaud%20coutancier/sounds/417640/
+звуки шагов - https://freesound.org/people/Cinetony/sounds/558215/
+пить - https://freesound.org/people/karinalarasart/sounds/440917/
+
+
+R:\\0Assets\\sfx\\AE_FreeFS_U1_07182024.zip\\AE_FreeFS_U1_07182024\\
+pickup sticks - FEETHmn-LOOSE WOOD_Footsteps With Tennis Shoes On Shifting Loose Wood 11_AUDIOELK_NONE.wav
+
+JDSherbert - Tabletop Games SFX Pack - Piece Move - 1.mp3 R:\\0Assets\\sfx\\JDSherbert - Tabletop Games SFX Pack (FREE).zip\\Free\\Mono\\mp3\\
+
+forest1 - https://freesound.org/people/daveincamas/sounds/65247/
+forest2 - https://freesound.org/people/onursamli/sounds/846909/
+coffeemachine - https://cdn.freesound.org/previews/508/508692_10463563-lq.mp3
+хавать - https://freesound.org/people/opriema/sounds/797763/
+
+амбиент - https://freesound.org/people/ChristmasKrumble666/sounds/744098/
+капмфайр - https://freesound.org/people/kyles/sounds/453783/
+налить - https://freesound.org/people/nataliegonzalez19/sounds/636151/
+
+
+ветка https://zvukipro.com/predmet/769-zvuki-derevjannyh-vetok.html
+ведро https://zvukipro.com/predmet/445-zvuki-vedra.html
+
+гитара
+https://freesound.org/people/brylie/sounds/426695/
+https://freesound.org/people/brylie/sounds/437642/
+https://freesound.org/people/Alex_hears_things/sounds/812617/
+
+https://freesound.org/people/brylie/sounds/426695/
+snow - https://freesound.org/people/florianreichelt/sounds/453167/"
+fit_content = true

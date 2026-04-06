@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://hfhco6omty7p"]
+
+[sub_resource type="GDScript" id="GDScript_kdqh4"]
+script/source = "extends StaticBody3D
+
+func hint():
+	return [
+		\"label_hint\", \"F\", \"Утилизировать кофе\"
+	]
+"
+
+[sub_resource type="BoxMesh" id="BoxMesh_hetp2"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ilty0"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[node name="Eraser" type="StaticBody3D" unique_id=1111748247 groups=["hint", "interactable"]]
+script = SubResource("GDScript_kdqh4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=265630346]
+mesh = SubResource("BoxMesh_hetp2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=25734628]
+shape = SubResource("ConvexPolygonShape3D_ilty0")

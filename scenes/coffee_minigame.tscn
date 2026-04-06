@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://bstamu6isuytn"]
+
+[ext_resource type="Texture2D" uid="uid://ddwtxh4j3j601" path="res://assets/zone.png" id="1_ipkrc"]
+[ext_resource type="Texture2D" uid="uid://dh7ocj54klayw" path="res://assets/strelka.png" id="2_vdge3"]
+[ext_resource type="Texture2D" uid="uid://dfjqvrocoblbb" path="res://assets/track.png" id="3_13anl"]
+
+[node name="CoffeeMinigame" type="CanvasLayer" unique_id=461061183]
+
+[node name="Control" type="Control" parent="." unique_id=1852575493]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Zone" type="CenterContainer" parent="Control" unique_id=38724116]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -187.27502
+offset_top = -458.308
+offset_right = 188.72498
+offset_bottom = -353.07703
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 0.25830874
+pivot_offset = Vector2(188, 2048)
+
+[node name="TextureRect" type="TextureRect" parent="Control/Zone" unique_id=866353427]
+layout_mode = 2
+texture = ExtResource("1_ipkrc")
+
+[node name="Strelka" type="CenterContainer" parent="Control" unique_id=447665365]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -418.63
+offset_right = 12.0
+offset_bottom = 93.369995
+grow_horizontal = 2
+grow_vertical = 0
+rotation = -0.36651915
+pivot_offset = Vector2(20, 2048)
+
+[node name="TextureRect" type="TextureRect" parent="Control/Strelka" unique_id=583032270]
+layout_mode = 2
+texture = ExtResource("2_vdge3")
+
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=1901226501]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -800.0
+offset_top = -450.0
+offset_right = 800.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("3_13anl")
