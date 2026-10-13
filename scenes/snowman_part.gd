@@ -48,7 +48,6 @@ func cleanup():
 	preview.hide()
 	GLOBAL.hints.rm_hint("snowball")
 	GLOBAL.hints.rm_hint("mousewheel")
-	
 
 
 func ray_hints(_body):
@@ -82,7 +81,6 @@ func use(_point: Vector3, _dir, _body, _normal):
 	var forward = right.cross(up).normalized()
 	body.global_position = _point # - _normal * size * 0.06
 	
-	
 	body.global_basis = Basis(right, up, -forward)
 	body.scale = -Vector3.ONE * size
 	var c = $CollisionShape3D.duplicate()
@@ -90,12 +88,6 @@ func use(_point: Vector3, _dir, _body, _normal):
 	body.add_child(c)
 	body.add_child($MeshInstance3D.duplicate())
 	body.add_to_group("pasted")
-	print(body)
-
-	#cleanup()
-	#preview.queue_free()
-	#self.queue_free()
-	#get_tree().create_timer(0.001).timeout.connect(func (): GLOBAL.hints.rm_hint("snowball"))
 
 
 func on_state_enter(_state):
@@ -111,6 +103,7 @@ func on_pickup():
 	GLOBAL.hints.hint("mousewheel", "Колесико", "Изменить размер")
 	d = 0
 	size = 1
+
 
 func can_use(_body):
 	if self.disabled: return false
