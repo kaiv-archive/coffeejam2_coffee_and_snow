@@ -21,7 +21,7 @@ var start_point : Vector3
 var has_start := false
 
 var rope_mesh : MeshInstance3D = null
-var rope_col : Area3D = null
+var rope_col : Area3D = null # Теперь будет использоваться только для финальной веревки
 var preview_end : Vector3
 
 var lanterns_root : Node3D = null
@@ -48,15 +48,11 @@ func _ready():
 
 func _warmup_rope_and_lanterns():
 	var dummy_start = Vector3(0, -100, 0)
-	var dummy_end = dummy_start + Vector3(0, 0, 2.0) # длина 2 метра, как раз поместится 3 лампочки
+	var dummy_end = dummy_start + Vector3(0, 0, 2.0)
 	
-	# 1. Создаем временную веревку с Area3D в качестве корня
 	var warmup_rope = _create_rope_node(dummy_start, dummy_end, final_material)
-	
-	# 2. Спавним 3 лампочки для прогрева материалов и сцен
 	var warmup_lanterns = _spawn_lanterns_internal(null, dummy_start, dummy_end)
 	
-	# Очищаем кэш-объекты в следующем кадре или сразу
 	if warmup_rope:
 		warmup_rope.queue_free()
 	if warmup_lanterns:
@@ -90,28 +86,28 @@ func use(point: Vector3, _dir, body, _normal):
 			return
 		has_start = true
 		start_point = point
-		_create_rope()
+		_create_rope() # Создаем только меш для превью
 	else:
 		if not body:
 			return
-		_update_rope(start_point, point, false)
 		
-		_spawn_lanterns(rope_col, start_point, point)
-		has_start = false
-		rope_col = null
+		# Удаляем временный превью-меш, так как вместо него создадим полноценный объект с коллизией
+		if rope_mesh and rope_mesh.is_inside_tree():
+			rope_mesh.queue_free()
 		rope_mesh = null
 
+		# Создаем полноценную веревку с коллизией (Area3D) сразу на финальной позиции
+		var final_rope = _create_rope_node(start_point, point, final_material)
+		
+		# Спавним лампочки, привязывая их к созданной веревке
+		_spawn_lanterns(final_rope, start_point, point)
+		
+		has_start = false
+		rope_col = null
 
+
+# Теперь создает ТОЛЬКО визуальный меш для режима превью (без Area3D и без коллизии)
 func _create_rope():
-	rope_col = Area3D.new()
-	
-	var s := CollisionShape3D.new()
-	s.shape = CylinderShape3D.new()
-	s.shape.height = 0.01
-	s.shape.radius = rope_radius * 7.0
-	s.name = "shape"
-	rope_col.add_child(s)
-	
 	rope_mesh = MeshInstance3D.new()
 	var cyl := CylinderMesh.new()
 	cyl.top_radius = rope_radius
@@ -121,14 +117,12 @@ func _create_rope():
 	cyl.rings = 0
 	rope_mesh.mesh = cyl
 	rope_mesh.material_override = preview_material
-	rope_mesh.name = "mesh"
+	rope_mesh.name = "preview_mesh"
 	
-	rope_col.add_child(rope_mesh)
-	rope_col.add_to_group("pasted")
-	get_tree().root.add_child(rope_col)
+	get_tree().root.add_child(rope_mesh)
 
 
-# Вспомогательная функция для создания полноценной веревки (Area3D теперь отец)
+# Вспомогательная функция для создания полноценной веревки (используется и для прогрева, и при финальном создании)
 func _create_rope_node(a: Vector3, b: Vector3, mat: Material) -> Area3D:
 	var area = Area3D.new()
 	
@@ -154,6 +148,7 @@ func _create_rope_node(a: Vector3, b: Vector3, mat: Material) -> Area3D:
 	area.add_child(mesh_inst)
 	
 	s.shape.height = length
+	s.shape.radius = rope_radius * 7.0 # Сохраняем радиус коллизии из вашего старого _create_rope
 	
 	get_tree().root.add_child(area)
 	area.add_to_group("pasted")
@@ -167,7 +162,7 @@ func _create_rope_node(a: Vector3, b: Vector3, mat: Material) -> Area3D:
 
 
 func _update_rope(a: Vector3, b: Vector3, is_preview: bool):
-	if rope_col == null or rope_mesh == null:
+	if rope_mesh == null:
 		return
 
 	var dir = b - a
@@ -177,12 +172,11 @@ func _update_rope(a: Vector3, b: Vector3, is_preview: bool):
 
 	var cyl := rope_mesh.mesh as CylinderMesh
 	cyl.height = length
-	var s := rope_col.get_node("shape").shape as CylinderShape3D
-	s.height = length
 
-	rope_col.global_position = a + dir * 0.5
-	rope_col.global_transform.basis = Basis.looking_at(dir.normalized(), Vector3.UP)
-	rope_col.rotate_object_local(Vector3.RIGHT, PI * 0.5)
+	rope_mesh.global_position = a + dir * 0.5
+	if length > 0.001:
+		rope_mesh.global_transform.basis = Basis.looking_at(dir.normalized(), Vector3.UP)
+		rope_mesh.rotate_object_local(Vector3.RIGHT, PI * 0.5)
 
 	rope_mesh.material_override = preview_material if is_preview else final_material
 
@@ -257,7 +251,9 @@ func _get_tmaterial_for_color(col: Color) -> StandardMaterial3D:
 
 
 func cleanup():
-	if rope_col:
+	if rope_mesh and rope_mesh.is_inside_tree():
+		rope_mesh.queue_free()
+	if rope_col and rope_col.is_inside_tree():
 		rope_col.queue_free()
 	rope_col = null
 	rope_mesh = null
